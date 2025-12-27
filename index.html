@@ -1,0 +1,820 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Jamros LLC | Autos usados en Missouri</title>
+  <meta name="description" content="Autos usados verificados en Missouri. Trato rápido, papeles claros, opciones de financiamiento y trade-in." />
+
+  <style>
+    :root{
+      --bg: #070A10;
+      --card: rgba(255,255,255,.08);
+      --card2: rgba(255,255,255,.06);
+      --text: rgba(255,255,255,.92);
+      --muted: rgba(255,255,255,.65);
+      --line: rgba(255,255,255,.12);
+      --accent: #8B5CF6; /* violeta */
+      --accent2:#22C55E; /* verde */
+      --shadow: 0 18px 60px rgba(0,0,0,.55);
+      --radius: 18px;
+      --max: 1120px;
+    }
+
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, "Noto Sans", "Liberation Sans", sans-serif;
+      color:var(--text);
+      background:
+        radial-gradient(1000px 600px at 20% -10%, rgba(139,92,246,.35), transparent 55%),
+        radial-gradient(900px 520px at 95% 5%, rgba(34,197,94,.22), transparent 55%),
+        radial-gradient(900px 520px at 70% 90%, rgba(59,130,246,.18), transparent 55%),
+        var(--bg);
+      overflow-x:hidden;
+    }
+
+    a{color:inherit; text-decoration:none}
+    .wrap{max-width:var(--max); margin:0 auto; padding:0 18px}
+
+    /* NAV */
+    .nav{
+      position:sticky; top:0; z-index:50;
+      backdrop-filter: blur(14px);
+      background: rgba(7,10,16,.55);
+      border-bottom:1px solid var(--line);
+    }
+    .nav-inner{
+      display:flex; align-items:center; justify-content:space-between;
+      padding:14px 0;
+      gap:14px;
+    }
+    .brand{
+      display:flex; align-items:center; gap:10px;
+      font-weight:800; letter-spacing:.2px;
+    }
+    .logo{
+      width:36px; height:36px; border-radius:12px;
+      background: linear-gradient(135deg, rgba(139,92,246,1), rgba(34,197,94,1));
+      box-shadow: 0 12px 30px rgba(139,92,246,.25);
+      position:relative;
+      overflow:hidden;
+    }
+    .logo::after{
+      content:"";
+      position:absolute; inset:-40%;
+      background: radial-gradient(circle at 30% 30%, rgba(255,255,255,.65), transparent 55%);
+      transform: rotate(20deg);
+      opacity:.75;
+    }
+    .nav-links{
+      display:flex; gap:16px; align-items:center;
+      color:var(--muted);
+      font-weight:600;
+    }
+    .nav-links a{padding:8px 10px; border-radius:12px}
+    .nav-links a:hover{background: rgba(255,255,255,.06); color:var(--text)}
+    .nav-cta{
+      display:flex; gap:10px; align-items:center;
+    }
+    .btn{
+      display:inline-flex; align-items:center; justify-content:center;
+      gap:8px;
+      padding:10px 14px;
+      border-radius:14px;
+      border:1px solid var(--line);
+      background: rgba(255,255,255,.06);
+      color:var(--text);
+      font-weight:700;
+      box-shadow: 0 10px 24px rgba(0,0,0,.25);
+      transition: transform .15s ease, background .15s ease, border-color .15s ease;
+      cursor:pointer;
+      user-select:none;
+    }
+    .btn:hover{transform: translateY(-1px); background: rgba(255,255,255,.09); border-color: rgba(255,255,255,.18)}
+    .btn.primary{
+      border-color: rgba(139,92,246,.6);
+      background: linear-gradient(135deg, rgba(139,92,246,.95), rgba(34,197,94,.75));
+      box-shadow: 0 18px 40px rgba(139,92,246,.22);
+    }
+    .btn.primary:hover{transform: translateY(-2px)}
+
+    /* HERO */
+    .hero{
+      position:relative;
+      padding:54px 0 10px;
+    }
+    .hero-grid{
+      display:grid;
+      grid-template-columns: 1.15fr .85fr;
+      gap:24px;
+      align-items:start;
+    }
+    @media (max-width: 980px){
+      .hero-grid{grid-template-columns:1fr; gap:18px}
+      .nav-links{display:none}
+    }
+
+    .kicker{
+      display:inline-flex; align-items:center; gap:10px;
+      padding:8px 12px;
+      border-radius:999px;
+      background: rgba(255,255,255,.06);
+      border:1px solid var(--line);
+      color: rgba(255,255,255,.75);
+      font-weight:700;
+      letter-spacing:.2px;
+    }
+    .dot{
+      width:10px; height:10px; border-radius:999px;
+      background: var(--accent2);
+      box-shadow: 0 0 0 6px rgba(34,197,94,.12);
+      animation: pulse 1.6s ease-in-out infinite;
+    }
+    @keyframes pulse{
+      0%,100%{transform: scale(1); opacity:1}
+      50%{transform: scale(1.15); opacity:.75}
+    }
+
+    h1{
+      margin:16px 0 10px;
+      font-size: clamp(34px, 4.2vw, 54px);
+      line-height:1.06;
+      letter-spacing:-.8px;
+    }
+    .sub{
+      color: var(--muted);
+      font-size: 16.5px;
+      line-height:1.55;
+      max-width: 62ch;
+    }
+    .hero-actions{
+      margin-top:18px;
+      display:flex; gap:12px; flex-wrap:wrap;
+      align-items:center;
+    }
+
+    .badges{
+      margin-top:16px;
+      display:flex; gap:10px; flex-wrap:wrap;
+      color: rgba(255,255,255,.72);
+    }
+    .badge{
+      display:inline-flex; gap:8px; align-items:center;
+      padding:10px 12px;
+      border-radius: 14px;
+      border:1px solid var(--line);
+      background: rgba(255,255,255,.05);
+      backdrop-filter: blur(10px);
+    }
+    .badge b{color: rgba(255,255,255,.92)}
+    .spark{
+      width:10px; height:10px; border-radius:4px;
+      background: rgba(139,92,246,.95);
+      box-shadow: 0 0 0 6px rgba(139,92,246,.12);
+    }
+
+    /* HERO RIGHT CARD (animaciones “realistas”) */
+    .panel{
+      border-radius: var(--radius);
+      border:1px solid var(--line);
+      background: linear-gradient(180deg, rgba(255,255,255,.10), rgba(255,255,255,.05));
+      box-shadow: var(--shadow);
+      overflow:hidden;
+      position:relative;
+      min-height: 440px;
+    }
+
+    /* “Car photo” fake (puedes cambiarlo por una imagen real luego) */
+    .car-hero{
+      height: 260px;
+      position:relative;
+      background:
+        radial-gradient(900px 260px at 20% 40%, rgba(139,92,246,.25), transparent 60%),
+        radial-gradient(700px 240px at 90% 30%, rgba(34,197,94,.18), transparent 60%),
+        linear-gradient(135deg, rgba(255,255,255,.06), rgba(255,255,255,.02));
+      border-bottom:1px solid var(--line);
+      overflow:hidden;
+    }
+
+    /* “carriles” animados tipo motion */
+    .lane{
+      position:absolute; left:-20%;
+      width:140%; height:2px;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,.20), transparent);
+      opacity:.6;
+      animation: lane 2.4s linear infinite;
+    }
+    .lane:nth-child(1){top:38%; animation-duration: 2.2s; opacity:.55}
+    .lane:nth-child(2){top:52%; animation-duration: 2.8s; opacity:.40}
+    .lane:nth-child(3){top:66%; animation-duration: 3.1s; opacity:.35}
+    @keyframes lane{
+      0%{transform: translateX(-10%)}
+      100%{transform: translateX(10%)}
+    }
+
+    /* tarjetas flotantes (acciones en movimiento) */
+    .float-card{
+      position:absolute;
+      right:16px;
+      top:16px;
+      padding:12px 12px;
+      border-radius: 16px;
+      background: rgba(0,0,0,.35);
+      border:1px solid rgba(255,255,255,.16);
+      backdrop-filter: blur(10px);
+      box-shadow: 0 18px 40px rgba(0,0,0,.45);
+      width: min(260px, 86%);
+      transform: translateY(8px);
+      animation: floaty 2.8s ease-in-out infinite;
+    }
+    .float-card:nth-child(2){
+      right:auto; left:16px; top:auto; bottom:18px;
+      animation-duration: 3.3s;
+    }
+    @keyframes floaty{
+      0%,100%{transform: translateY(8px)}
+      50%{transform: translateY(0px)}
+    }
+    .float-title{font-weight:900; letter-spacing:-.2px}
+    .float-sub{color: rgba(255,255,255,.72); font-size: 13.2px; margin-top:4px}
+    .pill{
+      display:inline-flex; align-items:center; gap:8px;
+      margin-top:10px;
+      padding:8px 10px;
+      border-radius:999px;
+      background: rgba(255,255,255,.08);
+      border:1px solid rgba(255,255,255,.12);
+      font-weight:800;
+      font-size: 13px;
+    }
+    .pill .p-dot{
+      width:8px; height:8px; border-radius:999px;
+      background: var(--accent2);
+      box-shadow: 0 0 0 6px rgba(34,197,94,.14);
+    }
+
+    .panel-body{padding:16px}
+    .mini-grid{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap:12px;
+    }
+    .mini{
+      border-radius: 16px;
+      background: rgba(255,255,255,.06);
+      border:1px solid var(--line);
+      padding:14px;
+    }
+    .mini .n{
+      font-weight:950;
+      font-size: 22px;
+      letter-spacing:-.3px;
+    }
+    .mini .t{color: var(--muted); margin-top:6px; font-weight:650}
+
+    /* SECCIONES */
+    section{padding: 42px 0}
+    .section-title{
+      font-size: 22px;
+      letter-spacing:-.3px;
+      margin:0 0 14px;
+    }
+    .grid{
+      display:grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap:14px;
+    }
+    @media (max-width: 980px){
+      .grid{grid-template-columns:1fr}
+    }
+    .card{
+      border-radius: var(--radius);
+      border:1px solid var(--line);
+      background: rgba(255,255,255,.05);
+      box-shadow: 0 14px 40px rgba(0,0,0,.35);
+      padding:16px;
+      overflow:hidden;
+      position:relative;
+      transform: translateY(10px);
+      opacity: 0;
+      transition: transform .6s ease, opacity .6s ease;
+    }
+    .card.in{transform: translateY(0); opacity:1}
+    .card h3{margin:0 0 6px; letter-spacing:-.2px}
+    .card p{margin:0; color: var(--muted); line-height:1.5}
+    .tag{
+      display:inline-flex; gap:8px; align-items:center;
+      margin-top:12px;
+      padding:8px 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,.14);
+      background: rgba(255,255,255,.06);
+      color: rgba(255,255,255,.82);
+      font-weight:800;
+      font-size: 13px;
+      width: fit-content;
+    }
+
+    /* INVENTARIO */
+    .inventory{
+      display:grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap:14px;
+    }
+    @media (max-width: 980px){
+      .inventory{grid-template-columns:1fr}
+    }
+    .car{
+      border-radius: var(--radius);
+      border:1px solid var(--line);
+      background: rgba(255,255,255,.05);
+      overflow:hidden;
+      box-shadow: 0 14px 40px rgba(0,0,0,.35);
+      transform: translateY(10px);
+      opacity:0;
+      transition: transform .6s ease, opacity .6s ease;
+    }
+    .car.in{transform: translateY(0); opacity:1}
+    .car-img{
+      height: 160px;
+      background:
+        radial-gradient(600px 220px at 20% 20%, rgba(139,92,246,.25), transparent 60%),
+        radial-gradient(600px 220px at 80% 40%, rgba(34,197,94,.18), transparent 60%),
+        linear-gradient(135deg, rgba(255,255,255,.08), rgba(255,255,255,.02));
+      border-bottom:1px solid var(--line);
+      position:relative;
+    }
+    .car-img::after{
+      content:"";
+      position:absolute; inset:0;
+      background: radial-gradient(circle at 30% 40%, rgba(255,255,255,.18), transparent 55%);
+      opacity:.9;
+    }
+    .car-body{padding:14px}
+    .car-title{font-weight:950; letter-spacing:-.2px; margin:0}
+    .car-meta{margin:8px 0 10px; color:var(--muted)}
+    .price{font-weight:950; font-size:20px; letter-spacing:-.2px}
+    .car-actions{display:flex; gap:10px; flex-wrap:wrap; margin-top:12px}
+
+    /* CONTACTO */
+    .contact{
+      border-radius: var(--radius);
+      border:1px solid var(--line);
+      background: rgba(255,255,255,.05);
+      box-shadow: var(--shadow);
+      padding:18px;
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap:14px;
+    }
+    @media (max-width: 980px){
+      .contact{grid-template-columns:1fr}
+    }
+    .field{
+      display:flex; flex-direction:column; gap:8px;
+    }
+    label{color: rgba(255,255,255,.78); font-weight:800; font-size: 13px}
+    input, textarea{
+      padding:12px 12px;
+      border-radius: 14px;
+      border:1px solid rgba(255,255,255,.14);
+      background: rgba(0,0,0,.25);
+      color: var(--text);
+      outline:none;
+    }
+    textarea{min-height: 110px; resize: vertical}
+    input:focus, textarea:focus{border-color: rgba(139,92,246,.55)}
+    .foot{
+      padding: 26px 0 44px;
+      color: rgba(255,255,255,.55);
+      border-top:1px solid var(--line);
+      margin-top: 24px;
+    }
+
+    /* ENTRADA ANIMADA DEL HERO */
+    .reveal{
+      opacity:0; transform: translateY(10px);
+      animation: enter .7s ease forwards;
+    }
+    .reveal.d2{animation-delay:.12s}
+    .reveal.d3{animation-delay:.22s}
+    .reveal.d4{animation-delay:.34s}
+    @keyframes enter{
+      to{opacity:1; transform: translateY(0)}
+    }
+
+    /* menu mobile simple */
+    .mobile{
+      display:none;
+    }
+    @media (max-width: 980px){
+      .mobile{display:inline-flex}
+    }
+    .drawer{
+      position:fixed; inset:0;
+      background: rgba(0,0,0,.55);
+      backdrop-filter: blur(10px);
+      display:none;
+      align-items:flex-start;
+      justify-content:center;
+      z-index:99;
+      padding: 70px 18px 18px;
+    }
+    .drawer.open{display:flex}
+    .drawer-card{
+      width:min(520px, 100%);
+      border-radius: 20px;
+      background: rgba(10,14,22,.92);
+      border:1px solid rgba(255,255,255,.14);
+      box-shadow: var(--shadow);
+      padding:14px;
+    }
+    .drawer a{
+      display:block;
+      padding:12px 12px;
+      border-radius: 14px;
+      color: rgba(255,255,255,.85);
+      font-weight:850;
+    }
+    .drawer a:hover{background: rgba(255,255,255,.06)}
+  </style>
+</head>
+
+<body>
+  <div class="nav">
+    <div class="wrap">
+      <div class="nav-inner">
+        <div class="brand">
+          <div class="logo" aria-hidden="true"></div>
+          <div>
+            <div style="font-size:14px; color: rgba(255,255,255,.75); font-weight:800;">Jamros LLC</div>
+            <div style="font-size:12px; color: rgba(255,255,255,.55); font-weight:700;">Autos usados • Missouri</div>
+          </div>
+        </div>
+
+        <div class="nav-links" aria-label="Navegación">
+          <a href="#inventario">Inventario</a>
+          <a href="#servicios">Servicios</a>
+          <a href="#como">Cómo funciona</a>
+          <a href="#resenas">Reseñas</a>
+          <a href="#contacto">Contacto</a>
+        </div>
+
+        <div class="nav-cta">
+          <button class="btn mobile" id="menuBtn" type="button">☰ Menú</button>
+          <a class="btn" href="#contacto">Cotizar</a>
+          <a class="btn primary" id="whatsBtn" href="#" rel="noopener">WhatsApp</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="drawer" id="drawer" aria-hidden="true">
+    <div class="drawer-card">
+      <div style="display:flex; justify-content:space-between; align-items:center; gap:10px;">
+        <div style="font-weight:950; letter-spacing:-.2px;">Menú</div>
+        <button class="btn" id="closeDrawer" type="button">Cerrar</button>
+      </div>
+      <div style="height:10px"></div>
+      <a href="#inventario" class="mLink">Inventario</a>
+      <a href="#servicios" class="mLink">Servicios</a>
+      <a href="#como" class="mLink">Cómo funciona</a>
+      <a href="#resenas" class="mLink">Reseñas</a>
+      <a href="#contacto" class="mLink">Contacto</a>
+    </div>
+  </div>
+
+  <header class="hero">
+    <div class="wrap">
+      <div class="hero-grid">
+        <div>
+          <div class="kicker reveal">
+            <span class="dot" aria-hidden="true"></span>
+            Inventario real • Trato rápido • Papeles claros
+          </div>
+
+          <h1 class="reveal d2">Compra tu próximo auto con confianza<br/>y un look profesional desde el primer clic.</h1>
+
+          <p class="sub reveal d3">
+            Autos usados seleccionados y listos para entregar. Opciones de financiamiento, trade-in y asesoría clara.
+            Lo hacemos simple: eliges, verificamos, cierras.
+          </p>
+
+          <div class="hero-actions reveal d4">
+            <a class="btn primary" href="#inventario">🚗 Ver inventario</a>
+            <a class="btn" href="#contacto">📄 Cotizar hoy</a>
+            <a class="btn" href="#como">▶ Cómo funciona</a>
+          </div>
+
+          <div class="badges">
+            <div class="badge"><span class="spark" aria-hidden="true"></span> <b>Verificación</b> antes de publicar</div>
+            <div class="badge"><span class="spark" aria-hidden="true"></span> <b>Respuesta rápida</b> (horas, no días)</div>
+            <div class="badge"><span class="spark" aria-hidden="true"></span> <b>Transparencia</b> en precio y papeles</div>
+          </div>
+        </div>
+
+        <div class="panel" aria-label="Panel destacado">
+          <div class="car-hero">
+            <div class="lane"></div>
+            <div class="lane"></div>
+            <div class="lane"></div>
+
+            <div class="float-card">
+              <div class="float-title">🔥 Oferta destacada</div>
+              <div class="float-sub">Toyota Corolla 2022 • Clean Title</div>
+              <div class="pill"><span class="p-dot" aria-hidden="true"></span> Financiamiento disponible</div>
+            </div>
+
+            <div class="float-card">
+              <div class="float-title">✅ Proceso en 3 pasos</div>
+              <div class="float-sub">Elegir → Verificar → Cerrar</div>
+              <div class="pill"><span class="p-dot" aria-hidden="true"></span> Trato rápido</div>
+            </div>
+          </div>
+
+          <div class="panel-body">
+            <div class="mini-grid">
+              <div class="mini">
+                <div class="n" id="nAutos">0</div>
+                <div class="t">Autos publicados</div>
+              </div>
+              <div class="mini">
+                <div class="n" id="nHoras">0</div>
+                <div class="t">Horas para respuesta</div>
+              </div>
+              <div class="mini">
+                <div class="n" id="nVendidos">0</div>
+                <div class="t">Autos vendidos</div>
+              </div>
+              <div class="mini">
+                <div class="n" id="nRating">0.0</div>
+                <div class="t">Calificación promedio</div>
+              </div>
+            </div>
+
+            <div style="height:12px"></div>
+
+            <div style="display:flex; gap:10px; flex-wrap:wrap;">
+              <a class="btn" href="#inventario">Ver más</a>
+              <a class="btn primary" href="#contacto">Reservar / Separar</a>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section id="servicios">
+      <div class="wrap">
+        <h2 class="section-title">Servicios</h2>
+        <div class="grid">
+          <div class="card">
+            <h3>Compra / Venta</h3>
+            <p>Te ayudamos a vender o comprar con proceso claro, sin vueltas.</p>
+            <div class="tag">✅ Papeles claros</div>
+          </div>
+          <div class="card">
+            <h3>Financiamiento</h3>
+            <p>Opciones según tu perfil. Te decimos lo real, sin promesas raras.</p>
+            <div class="tag">💳 Opciones disponibles</div>
+          </div>
+          <div class="card">
+            <h3>Trade-in</h3>
+            <p>Recibimos tu vehículo como parte del pago. Evaluación rápida.</p>
+            <div class="tag">🔁 Trade-in</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="inventario">
+      <div class="wrap">
+        <h2 class="section-title">Inventario destacado</h2>
+        <p style="color:var(--muted); margin:0 0 14px; line-height:1.5;">
+          Reemplaza estos autos por los tuyos (modelo, millas, precio y foto). Yo te ayudo a dejarlo listo.
+        </p>
+
+        <div class="inventory">
+          <article class="car">
+            <div class="car-img"></div>
+            <div class="car-body">
+              <h3 class="car-title">Honda Civic 2021</h3>
+              <div class="car-meta">45k mi • Clean title • Automático</div>
+              <div class="price">$16,900</div>
+              <div class="car-actions">
+                <a class="btn" href="#contacto">Cotizar</a>
+                <a class="btn primary" href="#contacto">Ver más</a>
+              </div>
+            </div>
+          </article>
+
+          <article class="car">
+            <div class="car-img"></div>
+            <div class="car-body">
+              <h3 class="car-title">Toyota Corolla 2022</h3>
+              <div class="car-meta">52k mi • Title limpio • Garantía opcional</div>
+              <div class="price">$16,900</div>
+              <div class="car-actions">
+                <a class="btn" href="#contacto">Cotizar</a>
+                <a class="btn primary" href="#contacto">Ver más</a>
+              </div>
+            </div>
+          </article>
+
+          <article class="car">
+            <div class="car-img"></div>
+            <div class="car-body">
+              <h3 class="car-title">Nissan Altima 2020</h3>
+              <div class="car-meta">63k mi • Automático • Buen estado</div>
+              <div class="price">$15,500</div>
+              <div class="car-actions">
+                <a class="btn" href="#contacto">Cotizar</a>
+                <a class="btn primary" href="#contacto">Ver más</a>
+              </div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="como">
+      <div class="wrap">
+        <h2 class="section-title">Cómo funciona</h2>
+        <div class="grid">
+          <div class="card">
+            <h3>1) Elige</h3>
+            <p>Mira inventario y dinos qué auto te interesa (o qué buscas).</p>
+            <div class="tag">📌 Rápido</div>
+          </div>
+          <div class="card">
+            <h3>2) Verificamos</h3>
+            <p>Revisamos detalles clave: historial, papeles y condición.</p>
+            <div class="tag">🛠️ Transparente</div>
+          </div>
+          <div class="card">
+            <h3>3) Cierras</h3>
+            <p>Te ayudamos a cerrar fácil: pago, financiamiento o trade-in.</p>
+            <div class="tag">🤝 Seguro</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="resenas">
+      <div class="wrap">
+        <h2 class="section-title">Reseñas</h2>
+        <div class="grid">
+          <div class="card">
+            <h3>“Trato rápido y claro”</h3>
+            <p>Me explicaron todo y el proceso fue sencillo. Recomendado.</p>
+            <div class="tag">⭐ 5.0</div>
+          </div>
+          <div class="card">
+            <h3>“Sin sorpresas”</h3>
+            <p>Me mostraron el detalle del carro y los papeles. Todo bien.</p>
+            <div class="tag">⭐ 5.0</div>
+          </div>
+          <div class="card">
+            <h3>“Buena asesoría”</h3>
+            <p>Me ayudaron con opciones para pagar. Muy profesionales.</p>
+            <div class="tag">⭐ 4.9</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="contacto">
+      <div class="wrap">
+        <h2 class="section-title">Contacto / Cotización</h2>
+
+        <div class="contact">
+          <div class="field">
+            <label for="name">Nombre</label>
+            <input id="name" placeholder="Tu nombre" />
+          </div>
+          <div class="field">
+            <label for="phone">Teléfono</label>
+            <input id="phone" placeholder="Ej: (555) 555-5555" />
+          </div>
+          <div class="field" style="grid-column:1/-1">
+            <label for="msg">Qué auto buscas / mensaje</label>
+            <textarea id="msg" placeholder="Ej: Corolla 2022, presupuesto $17k, quiero financiamiento."></textarea>
+          </div>
+
+          <div style="display:flex; gap:10px; flex-wrap:wrap; grid-column:1/-1">
+            <button class="btn primary" id="sendWhats" type="button">Enviar por WhatsApp</button>
+            <a class="btn" href="#inventario">Ver inventario</a>
+          </div>
+
+          <div style="grid-column:1/-1; color:var(--muted); font-size:13px; line-height:1.5;">
+            Tip: cambia el número de WhatsApp en el script (abajo) para que te llegue directo a ti.
+          </div>
+        </div>
+
+        <div class="foot">
+          © <span id="year"></span> Jamros LLC • Missouri • Autos usados
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    // ✅ CONFIGURA TU WHATSAPP AQUÍ (con código de país)
+    // Ejemplo USA: 1 + número (sin espacios) -> 1XXXXXXXXXX
+    const WHATS_NUMBER = "1XXXXXXXXXX";
+
+    // Botones
+    const whatsBtn = document.getElementById("whatsBtn");
+    const sendWhats = document.getElementById("sendWhats");
+
+    function buildWhatsUrl(text){
+      const msg = encodeURIComponent(text);
+      return `https://wa.me/${WHATS_NUMBER}?text=${msg}`;
+    }
+
+    function openWhats(text){
+      const url = buildWhatsUrl(text);
+      window.open(url, "_blank", "noopener");
+    }
+
+    whatsBtn.addEventListener("click", (e) => {
+      e.preventDefault();
+      openWhats("Hola, vengo de la web de Jamros. Quiero información del inventario.");
+    });
+
+    sendWhats.addEventListener("click", () => {
+      const name = document.getElementById("name").value.trim();
+      const phone = document.getElementById("phone").value.trim();
+      const msg = document.getElementById("msg").value.trim();
+
+      const text =
+`Hola, soy ${name || "—"}.
+Tel: ${phone || "—"}
+Mensaje: ${msg || "Quiero una cotización / ver inventario."}`;
+
+      openWhats(text);
+    });
+
+    // Año
+    document.getElementById("year").textContent = new Date().getFullYear();
+
+    // Animación contadores (para dar “vida” al hero)
+    function animateNumber(el, to, decimals=0, duration=900){
+      const from = 0;
+      const start = performance.now();
+      function tick(now){
+        const p = Math.min(1, (now - start)/duration);
+        const eased = 1 - Math.pow(1-p, 3);
+        const val = from + (to-from)*eased;
+        el.textContent = val.toFixed(decimals);
+        if(p < 1) requestAnimationFrame(tick);
+      }
+      requestAnimationFrame(tick);
+    }
+
+    animateNumber(document.getElementById("nAutos"), 12, 0);
+    animateNumber(document.getElementById("nHoras"), 2, 0);
+    animateNumber(document.getElementById("nVendidos"), 38, 0);
+    animateNumber(document.getElementById("nRating"), 4.9, 1);
+
+    // Reveal al hacer scroll (cards e inventario)
+    const obs = new IntersectionObserver((entries)=>{
+      for(const e of entries){
+        if(e.isIntersecting){
+          e.target.classList.add("in");
+          obs.unobserve(e.target);
+        }
+      }
+    }, {threshold: 0.12});
+
+    document.querySelectorAll(".card, .car").forEach(el => obs.observe(el));
+
+    // Menú móvil
+    const drawer = document.getElementById("drawer");
+    document.getElementById("menuBtn").addEventListener("click", ()=>{
+      drawer.classList.add("open");
+      drawer.setAttribute("aria-hidden","false");
+    });
+    document.getElementById("closeDrawer").addEventListener("click", ()=>{
+      drawer.classList.remove("open");
+      drawer.setAttribute("aria-hidden","true");
+    });
+    drawer.addEventListener("click", (e)=>{
+      if(e.target === drawer){
+        drawer.classList.remove("open");
+        drawer.setAttribute("aria-hidden","true");
+      }
+    });
+    document.querySelectorAll(".mLink").forEach(a=>{
+      a.addEventListener("click", ()=>{
+        drawer.classList.remove("open");
+        drawer.setAttribute("aria-hidden","true");
+      });
+    });
+  </script>
+</body>
+</html>
